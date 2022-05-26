@@ -19,13 +19,13 @@ import java.util.List;
 public class GameFragment extends Fragment {
 
     /** binding for GameFragment */
-    static private FragmentGameBinding mBinding;
+    private FragmentGameBinding mBinding;
 
     /** current element being guessed that is stored as element */
-    private static Element currElement;
+    private Element currElement;
 
     /** current move (starting at 0) */
-    private static int currMove;
+    private static int currMove = 0;
 
     /** array of all elements in game */
     private static Element[] elements;
@@ -38,13 +38,13 @@ public class GameFragment extends Fragment {
      * @param id id of TextView as string
      * @return TextView
      */
-    public static TextView getTextView(String id) {
+    public TextView getTextView(String id) {
         //this will be changed to get text view for specific element
         return mBinding.Na;
     }
 
     /** changes element that is being guessed and makes last element text visible */
-    public static void updateCurrElement() {
+    public void updateCurrElement() {
         currElement.setVisible();
         currElement = elements[currMove];
     }
@@ -123,7 +123,7 @@ public class GameFragment extends Fragment {
      *
      * @return currElement
      */
-    static public Element getCurrElement() {
+    public Element getCurrElement() {
         return currElement;
     }
 
@@ -135,8 +135,8 @@ public class GameFragment extends Fragment {
      *
      * @param v TextView of element that is clicked
      */
-    static public void compareElements(TextView v) {
-        if(GameFragment.getCurrElement().getElementTextView() == v) {
+     public void compareElements(TextView v) {
+        if(currElement.getElementTextView() == v) {
             mBinding.moveText.setText(R.string.correct_text);
         }
         else {
@@ -163,6 +163,7 @@ public class GameFragment extends Fragment {
         mBinding = FragmentGameBinding.inflate(inflater);
         initializeElementArray();
         initializeGameArray();
+        currElement = elements[gameArray[0]];
 
         return mBinding.getRoot();
     }

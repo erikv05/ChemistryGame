@@ -16,13 +16,17 @@ public class Element {
     /** static variable updated on construction of element */
     private static int elementIndexCounter = 0;
 
+    /** listener for all elements */
     private static ElementListener listener = new ElementListener();
+
+    /** GameFragment object for method calls */
+    private final GameFragment mFragment = new GameFragment();
 
     /** default constructor for element */
     public Element(String name) {
         this.elementName = name;
         this.elementIndex = elementIndexCounter++;
-        this.elementTextView = GameFragment.getTextView(this.elementName);
+        this.elementTextView = mFragment.getTextView(this.elementName);
         this.elementTextView.setOnClickListener(listener);
     }
 

@@ -11,10 +11,12 @@ import androidx.fragment.app.FragmentManager;
 
 public class ElementListener implements View.OnClickListener {
 
+    private final GameFragment mFragment = new GameFragment();
+
     /** required overridden method onClick */
     @Override
     public void onClick(View view) {
-        GameFragment.compareElements((TextView) view); {
+        mFragment.compareElements((TextView) view); {
         }
     }
 }
