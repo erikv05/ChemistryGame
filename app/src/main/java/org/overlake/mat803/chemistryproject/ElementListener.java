@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 
 public class ElementListener implements View.OnClickListener {
 
+    /** required overridden method onClick */
     @Override
     public void onClick(View view) {
         GameFragment.compareElements((TextView) view); {

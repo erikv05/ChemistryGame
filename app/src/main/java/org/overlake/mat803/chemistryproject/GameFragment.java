@@ -18,25 +18,38 @@ import java.util.List;
 
 public class GameFragment extends Fragment {
 
+    /** binding for GameFragment */
     static private FragmentGameBinding mBinding;
+
+    /** current element being guessed that is stored as element */
     private static Element currElement;
+
+    /** current move (starting at 0) */
     private static int currMove;
+
+    /** array of all elements in game */
     private static Element[] elements;
-    private ElementListener listener;
+
+    /** randomized array of ints from 0, 53 indicating element guessing order */
     private static Integer[] gameArray;
 
-
-    public static void initializeViewFeatures() {
-        for (int i = 0; i < 54; i++) {
-            //elements[i].setTextView(mBinding.elements[i].getName());
-            //mBinding.elements[i].getName().setOnClickListener(listener);
-        }
+    /** gets TextView of a certain id
+     *
+     * @param id id of TextView as string
+     * @return TextView
+     */
+    public static TextView getTextView(String id) {
+        //this will be changed to get text view for specific element
+        return mBinding.Na;
     }
 
+    /** changes element that is being guessed and makes last element text visible */
     public static void updateCurrElement() {
+        currElement.setVisible();
         currElement = elements[currMove];
     }
 
+    /** shuffles and creates gameArray */
     public static void initializeGameArray() {
         gameArray = new Integer[54];
         for(int i = 0; i < 54; i++) {
@@ -47,6 +60,7 @@ public class GameFragment extends Fragment {
         intList.toArray(gameArray);
     }
 
+    /** initializes array of all elements used */
     public static void initializeElementArray() {
         elements = new Element[54];
         elements[0] = new Element("H");
@@ -105,13 +119,22 @@ public class GameFragment extends Fragment {
         elements[53] = new Element("Xe");
     }
 
+    /** getter for currElement
+     *
+     * @return currElement
+     */
     static public Element getCurrElement() {
         return currElement;
     }
 
+    /** required default constructor */
     public GameFragment() {
     }
 
+    /** checks if user input is correct
+     *
+     * @param v TextView of element that is clicked
+     */
     static public void compareElements(TextView v) {
         if(GameFragment.getCurrElement().getElementTextView() == v) {
             mBinding.moveText.setText(R.string.correct_text);
@@ -126,6 +149,7 @@ public class GameFragment extends Fragment {
 
 
 
+    /** required onCreate override */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,7 +162,6 @@ public class GameFragment extends Fragment {
                              Bundle savedInstanceState) {
         mBinding = FragmentGameBinding.inflate(inflater);
         initializeElementArray();
-        initializeViewFeatures();
         initializeGameArray();
 
         return mBinding.getRoot();
